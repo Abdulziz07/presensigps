@@ -28,6 +28,10 @@ Route::middleware(['guest:karyawan'])->group(function(){
         return view('auth.login');
     })->name('login');
     Route::post('/proseslogin',[AuthController::class, 'proseslogin']);
+
+    Route::get('/lupa-password', [AuthController::class, 'showForm'])->name('password.reset');
+    Route::post('/lupa-password', [AuthController::class, 'handleReset'])->name('password.reset.post');
+
 });
 
 Route::middleware(['guest:user'])->group(function(){
@@ -35,7 +39,15 @@ Route::middleware(['guest:user'])->group(function(){
         return view('auth.loginadmin');
     })->name('loginadmin');
     Route::post('/prosesloginadmin',[AuthController::class, 'prosesloginadmin']);
+
+    Route::get('/lupapassword', function () {
+        return view('auth.lupa_passwordadmin');
+    });
+    Route::post('/cekresetpassword', [AuthController::class, 'cekresetpassword'])->name('cek.reset.password');
+
 });
+
+
 
 Route::middleware(['auth:karyawan'])->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
@@ -71,6 +83,8 @@ Route::middleware(['auth:karyawan'])->group(function(){
 Route::middleware(['auth:user'])->group(function(){
     Route::get('/proseslogoutadmin',[AuthController::class, 'proseslogoutadmin']);
     Route::get('/panel/dashboardadmin',[DashboardController::class,'dashboardadmin']);
+    
+    Route::post('/karyawan/updatepwd',[KaryawanController::class,"updatepwd"]);
 
     Route::get('/karyawan',[KaryawanController::class,"index"]);
     Route::post('/karyawan/store',[KaryawanController::class,"store"]);

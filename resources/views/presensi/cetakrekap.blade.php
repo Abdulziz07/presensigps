@@ -54,16 +54,16 @@
   <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
   <section class="sheet padding-10mm">
 
-    <table style="width: 100%">
-        <tr>
-            <td style="text-align: center;">
-                <img src="{{asset ('assets/img/logohb.png')}}" width="120" height="120" alt="">
+  <table style="width: 100%;">
+        <tr style="vertical-align: middle;">
+            <td style="width: 10px; text-align: left; vertical-align: middle; padding: 10px;">
+              <img src="{{ asset('assets/img/logohb.png') }}" alt="Logo" width="100">
             </td>
-            <td>
-                <h3 style="margin-bottom: 10px;" >
+            <td style="text-align: left;">
+                <h3 style="margin-bottom: 10px;">
                     CV. HABERINDO <br>
-                    REKAP PRESENSI KARYAWAN <br>
-                    PERIODE {{strtoupper($namabulan[$bulan])}} {{$tahun}}<br>
+                    LAPORAN PRESENSI KARYAWAN <br>
+                    PERIODE {{ strtoupper($namabulan[$bulan]) }} {{ $tahun }}<br>
                 </h3>
                 <span><i>Jln Gendul no 46 Kel. Pengasinan, kec. Rawalumbu, kota Bekasi Timur-Jawa Barat,17115</i></span>
             </td>
@@ -73,62 +73,57 @@
     
     <table class="tabelpresensi">
         <tr>
-            <th rowspan="2">Nik</th>
+            <th rowspan="2">NRP</th>
             <th rowspan="2">Nama Karyawan</th>
             <th colspan="31">Tanggal</th>
             <th rowspan="2">TH</th>
         </tr>
         <tr>
-            
-            <?php
-            for($i=1; $i<=31;$i++){
-            ?>
-            
-            <th>{{$i}}</th>
-            <?php
-            }?>
+            <?php for($i = 1; $i <= 31; $i++) { ?>
+                <th>{{ $i }}</th>
+            <?php } ?>>
         </tr>
+
         @foreach($rekap as $d)
         <tr>
-            <td>{{$d->nik}}</td>
-            <td>{{$d->nama_lengkap}}</td>
+            <td>{{ $d->nik }}</td>
+            <td>{{ $d->nama_lengkap }}</td>
             <?php
             $totalhadir = 0;
             for ($i = 1; $i <= 31; $i++) {
                 $tgl = "tgl_" . $i;
+                $hadir = ['',''];
 
-                if(empty($d->$tgl)){
-                    $hadir = ['',''];
-                    $totalhadir += 1;
-                } else {
+                if (!empty($d->$tgl)) {
                     $hadir = explode("-", $d->$tgl);
-                    $totalhadir += 1;
+                    // Jika jam masuk tidak kosong, anggap hadir
+                    if (!empty($hadir[0])) {
+                        $totalhadir++;
+                    }
                 }
             ?>
-            
             <td>
-            <span style="color:{{ 
-                (
-                    ($hadir[0] >= '06:30:00' && $hadir[0] <= '07:15:00') || 
-                    ($hadir[0] >= '15:30:00' && $hadir[0] <= '16:15:00') || 
-                    ($hadir[0] >= '00:00:00' && $hadir[0] <= '00:30:00')
-                ) ? '' : 'red' 
-            }}">
-                {{ $hadir[0] }}
-            </span>
-            <span style="color:{{ 
-                (
-                    ($hadir[1] >= '06:00:00' && $hadir[1] <= '07:30:00') || 
-                    ($hadir[1] >= '15:45:00' && $hadir[1] <= '16:15:00') || 
-                    ($hadir[1] >= '23:30:00' && $hadir[1] <= '23:59:59')
-                ) ? '' : 'red' 
-            }}" >
-                {{ $hadir[1] }}
-            </span>
-                </td>
-            <?php
-            }?>
-        <td>{{$totalhadir}}</td>
+                <span style="color:{{
+                    (
+                        ($hadir[0] >= '06:30:00' && $hadir[0] <= '07:15:00') || 
+                        ($hadir[0] >= '15:30:00' && $hadir[0] <= '16:15:00') || 
+                        ($hadir[0] >= '00:00:00' && $hadir[0] <= '00:30:00')
+                    ) ? '' : 'red'
+                }}">
+                    {{ $hadir[0] }}
+                </span>
+                <span style="color:{{
+                    (
+                        ($hadir[1] >= '06:00:00' && $hadir[1] <= '07:30:00') || 
+                        ($hadir[1] >= '15:45:00' && $hadir[1] <= '16:15:00') || 
+                        ($hadir[1] >= '23:30:00' && $hadir[1] <= '23:59:59')
+                    ) ? '' : 'red'
+                }}">
+                    {{ $hadir[1] }}
+                </span>
+            </td>
+            <?php } ?>
+            <td>{{ $totalhadir }}</td>
         </tr>
         @endforeach
     </table>

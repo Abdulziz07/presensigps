@@ -196,15 +196,18 @@
               cancelButtonColor: "#d33",
               confirmButtonText: "Hapus"
             }).then((result) => {
-              if (result.isConfirmed) {
+            if (result.isConfirmed) {
+                // Optional: tampilkan notifikasi dulu
                 Swal.fire({
-                  title: "Deleted!",
-                  text: "Data Berhasil Di Hapus",
-                  icon: "success"
+                    title: "Deleted!",
+                    text: "Data Berhasil Di Hapus",
+                    icon: "success"
+                }).then(() => {
+                    form.submit();
                 });
-              }
-            });
+            }
         });
+    });
 
         $("#frmkaryawan").submit(function(){
             var nik = $("#nik").val();

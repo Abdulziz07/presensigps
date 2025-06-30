@@ -53,16 +53,16 @@
   <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
   <section class="sheet padding-10mm">
 
-    <table style="width: 100%">
-        <tr>
-            <td>
-                <img src="{{asset ('assets/img/logohb.png')}}" width="120" height="120" alt="">
+    <table style="width: 100%;">
+        <tr style="vertical-align: middle;">
+            <td style="width: 10px; text-align: center; vertical-align: middle; padding: 10px;">
+              <img src="{{ asset('assets/img/logohb.png') }}" alt="Logo" width="100">
             </td>
-            <td>
-                <h3 style="margin-bottom: 10px; text-align: center; margin-right: 90px;" >
+            <td style="text-align: center;">
+                <h3 style="margin-bottom: 10px;">
                     CV. HABERINDO <br>
                     LAPORAN PRESENSI KARYAWAN <br>
-                    PERIODE {{strtoupper($namabulan[$bulan])}} {{$tahun}}<br>
+                    PERIODE {{ strtoupper($namabulan[$bulan]) }} {{ $tahun }}<br>
                 </h3>
                 <span><i>Jln Gendul no 46 Kel. Pengasinan, kec. Rawalumbu, kota Bekasi Timur-Jawa Barat,17115</i></span>
             </td>
@@ -75,7 +75,7 @@
                 @php
                     $path = Storage::url('upload/karyawan/'.$karyawan->foto1);
                 @endphp
-                <img src="{{url($path)}}" alt="" width="120px" height="150px">
+                <img src="{{url($path)}}" alt="Logo" width="80">
             </td>
         </tr>
         <tr>
@@ -109,16 +109,12 @@
             <th>No.</th>
             <th>Tanggal</th>
             <th>Jam Masuk</th>
-            <th>Foto</th>
             <th>Jam Pulang</th>
-            <th>Foto</th>
             <th>Keterangan</th>
             <th>Jam Kerja</th>
         </tr>
         @foreach ($presensi as $d)
         @php
-            $path_in = Storage::url('upload/absensi'.$d->foto_in);
-            $path_out = Storage::url('upload/absensi'.$d->foto_out);
 
             $jamIn = \Carbon\Carbon::parse($d->jam_in);
             $jamOut = $d->jam_out ? \Carbon\Carbon::parse($d->jam_out) : null;
@@ -154,15 +150,7 @@
             <td>{{ $loop->iteration}}</td>
             <td>{{ date("d-m-Y",strtotime($d->tgl_presensi))}}</td>
             <td>{{ $d->jam_in }}</td>
-            <td><img src="{{url($path_in)}}" alt="" width="60px" height="60px"></td>
             <td>{{ $d->jam_out != null ? $d->jam_out : 'Belum Absen'}}</td>
-            <td>
-                @if ($d->jam_out != null)
-                <img src="{{ url($path_out)}}" alt="" width="60px" height="60px">
-                @else
-                <img src="{{ asset('assets/img/camera.jpg')}}" alt="" width="60px" height="60px">
-                @endif
-            </td>
             <td>
                 @if ($terlambat > 0)
                 {{ $status }}

@@ -48,9 +48,6 @@
             <div class="mb-2">
               <label class="form-label">
                 Password
-                <span class="form-label-description">
-                  <a href="./forgot-password.html">I forgot password</a>
-                </span>
               </label>
               <div class="input-group input-group-flat">
                 <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="off">
@@ -67,8 +64,9 @@
             </div>
             <div class="mb-2">
               <label class="form-check">
-                <input type="checkbox" class="form-check-input"/>
-                <span class="form-check-label">Remember me on this device</span>
+                <span class="form-label-description">
+                  <a href="{{ url('/lupapassword') }}">Lupa Password</a>
+                </span>
               </label>
             </div>
             @php

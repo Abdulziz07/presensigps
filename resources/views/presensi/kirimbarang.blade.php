@@ -84,8 +84,6 @@
                                     </form>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <table class="table table-bordered">
@@ -167,7 +165,7 @@
                                     {{ $karyawan->links('vendor.pagination.bootstrap-5')}}
                                 </div>
                             </div>
-    
+                            </div>
                         </div>
                     </div>
                 </div>

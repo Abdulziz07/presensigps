@@ -1,8 +1,25 @@
 @extends('layouts.presensi')
 @section('content')
+<style>
+.logout{
+    position: absolute;
+    color: white;
+    font-size: 30px;
+    text-decoration: none;
+    right: 15px
+}
+
+.logout:hover{
+    color:red;
+}
+</style>
 <!-- App Capsule -->
 <div id="appCapsule">
     <div class="section" id="user-section">
+        <a href="/proseslogout" class="logout">
+            <ion-icon name="log-out-outline"></ion-icon>
+
+        </a>
         <div id="user-detail">
             <div class="avatar">
                 @if(!empty(Auth::guard('karyawan')->user()->foto))
@@ -200,4 +217,32 @@
         </div>
     </div>
     <!-- * App Capsule -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const logoutLink = document.querySelector('.logout');
+
+        if (logoutLink) {
+            logoutLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Yakin ingin LogOut',
+                    text: 'Kamu akan keluar dari akun ini',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = logoutLink.getAttribute('href');
+                    }
+                });
+            });
+        }
+    });
+</script>
+
 @endsection
+

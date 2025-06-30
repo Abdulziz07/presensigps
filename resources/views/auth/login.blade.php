@@ -50,7 +50,7 @@
                     @csrf
                     <div class="form-group boxed">
                         <div class="input-wrapper">
-                            <input type="text" name="nik" class="form-control" id="nik" placeholder="NIK">
+                            <input type="text" name="nik" class="form-control" id="nik" placeholder="NRP">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -67,7 +67,9 @@
                     </div>
 
                     <div class="form-links mt-2">
-                        <div><a href="page-forgot-password.html" style="color: white;">Lupa Password?</a></div>
+                        <div>
+                            <a href="{{ route('password.reset') }}" style="color: white;">Lupa Password?</a>
+                        </div>
                     </div>
 
                     <div class="form-button-group" >

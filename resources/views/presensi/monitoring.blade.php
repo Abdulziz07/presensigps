@@ -35,7 +35,7 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Nik</th>
+                                            <th>NRP</th>
                                             <th>Nama Karyawan</th>
                                             <th>Departemen</th>
                                             <th>Jam Masuk</th>
