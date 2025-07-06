@@ -34,6 +34,9 @@
 <div class="row" style="margin-top: 70px">
     <div class="col">
         <input type="hidden" id="lokasi">
+        <input type="hidden" value="d" id="statusshift">
+        <input type="hidden" value="{{$lokasi->radius_tujuan}}" id="radius">
+        <input type="hidden" value="{{$lokasi->koordinat_tujuan}}" id="koordinat">
         <div class="webcam-capture"></div>
     </div>
 </div>
@@ -48,15 +51,7 @@
             Absen Pulang
         </button>
     </div>
-        <div class="form-group boxed">
-            <select name="statusshift" id="statusshift" class="form-control">
-                <option value="">Pilih Shift</option>
-                <option value="p">Shift 1 (Jam 0)</option>
-                <option value="s">Shift 2 (Jam 7)</option>
-                <option value="m">Shift 3 (Jam 16)</option>
-            </select>
-        </div>
-    </div>
+</div>
     <div class="form-group boxed">
         <div class="input-wrapper">
             <input type="text" class="form-control" id="ot" name="ot" placeholder="Jam OT hanya masuk saat Absen pulang">
@@ -103,12 +98,13 @@
 
     function successCallback(position){
         lokasi.value = position.coords.latitude+", "+position.coords.longitude;
-            var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 18);
-            var lokasi_kantor = "{{ $lok_kantor->lokasi_kantor }}";
+            var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 15);
+
+            var lokasi_kantor = "{{ $lokasi->koordinat_tujuan }}";
             var lok = lokasi_kantor.split(",");
             var lat_kantor = lok[0];
             var long_kantor = lok[1];
-            var radius = "{{ $lok_kantor->radius }}"
+            var radius = "{{ $lokasi->radius_tujuan }}"
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -116,6 +112,7 @@
         }).addTo(map);
         
             var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+
             var circle = L.circle([lat_kantor,long_kantor], {
             color: 'red',
             fillColor: '#f03',
@@ -135,25 +132,19 @@
 
     var lokasi = $("#lokasi").val();
     var statusshift = $("#statusshift").val();
-
-    // Validasi jika shift kosong
-    if (statusshift == "") {
-        Swal.fire({
-            title: 'Oops!',
-            text: 'Shift harus dipilih terlebih dahulu.',
-            icon: 'warning',
-        });
-        return false;
-    }
+    var koordinat =$("#koordinat").val();
+    var radius = $("#radius").val();
 
     $.ajax({
         type: 'POST',
-        url: '/presensi/store',
+        url: '/presensi/masukdinas',
         data: {
             _token: "{{ csrf_token() }}",
             image: image,
             lokasi: lokasi,
             statusshift: statusshift,
+            koordinat: koordinat,
+            radius:radius
         },
         cache: false,
         success: function (respond) {
@@ -184,23 +175,27 @@
     });
 });
 
-
-    $("#takeabsenpulang").click(function(e){
+$("#takeabsenpulang").click(function(e){
     Webcam.snap(function(uri){
         image = uri;
     });
 
     var lokasi = $("#lokasi").val();
     var ot = $("#ot").val();
+    var koordinat =$("#koordinat").val();
+    var radius = $("#radius").val();
+
 
     $.ajax({
         type:'POST',
-        url:'/presensi/pulang', // Sudah diganti
+        url:'/presensi/pulangdinas', // Sudah diganti
         data:{
             _token:"{{csrf_token() }}",
             image:image,
             lokasi:lokasi,
-            ot:ot
+            ot:ot,
+            koordinat: koordinat,
+            radius:radius
         },
         cache:false,
         success:function(respond){

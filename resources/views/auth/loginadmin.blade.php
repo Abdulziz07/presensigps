@@ -77,6 +77,21 @@
                         {{Session::get('warning')}}
                     </div>
                     @endif
+
+                    @if ($errors->has('email') && $errors->has('password'))
+                      <div class="alert alert-danger text-center">
+                        Email dan Password tidak boleh kosong
+                      </div>
+                    @elseif ($errors->has('email'))
+                      <div class="alert alert-danger text-center">
+                        Email tidak boleh kosong
+                      </div>
+                    @elseif ($errors->has('password'))
+                      <div class="alert alert-danger text-center">
+                        Password tidak boleh kosong
+                      </div>
+                    @endif
+
             <div class="form-footer">
               <button type="submit" class="btn btn-primary w-100">Sign in</button>
             </div>

@@ -25,16 +25,29 @@
                 @endphp
 
                 @if (
-                    ($jamIn > '07:15' && $jamIn <= '15:30') || 
-                    ($jamIn >= '16:15' && $jamIn < '23:30') || 
-                    ($jamIn >= '00:30' && $jamIn < '06:30')
+                    ($jamIn >= '00:00:00' && $jamIn <= '04:00:00') || // Telat Shift 1
+                    ($jamIn >= '07:05:00' && $jamIn <= '13:00:00') || // Telat Shift 2
+                    ($jamIn >= '16:05:00' && $jamIn <= '21:00:00')
 
                 )
                 <span class="badge bg-danger">Terlambat</span>
                 @else
                 <span class="badge bg-success">Tepat Waktu</span>
                @endif
+               </span>
+               @php
+               $status = match($d->status) {
+                    'p' => '(Shift 1)',
+                    's' => '(Shift 2)',
+                    'm' => '(Shift 3)',
+                    default => '(Dinas Luar)',
+                };
+                @endphp
+                <br>
+                <span class="badge bg-primary">{{ $status }}</span>
+
     </td>
+    <td>{{ $d->ot != null ? $d->ot : 0 }} Jam</td>
     <td>
         <a href="#" class="btn btn-primary tampilkanpeta" id="{{$d->id}}">
             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-map-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 18.5l-3 -1.5l-6 3v-13l6 -3l6 3l6 -3v7.5" /><path d="M9 4v13" /><path d="M15 7v5.5" /><path d="M21.121 20.121a3 3 0 1 0 -4.242 0c.418 .419 1.125 1.045 2.121 1.879c1.051 -.89 1.759 -1.516 2.121 -1.879z" /><path d="M19 18v.01" /></svg></a>

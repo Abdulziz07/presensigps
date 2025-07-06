@@ -73,18 +73,16 @@
                                 <span class="text-center">Izin</span>
                             </div>
                         </div>
-                        @if(strtolower(Auth::guard('karyawan')->user()->jabatan) == 'driver')
                         <div class="item-menu text-center">
                             <div class="menu-icon">
-                                <a href="/presensi/barang" class="orange" style="font-size: 40px;">
+                                <a href="/presensi/dinasluar" class="orange" style="font-size: 40px;">
                                     <ion-icon name="car-outline"></ion-icon>
                                 </a>
                             </div>
                             <div class="menu-name">
-                                Kirim Barang
+                                Dinas Luar 
                             </div>
                         </div>
-                        @endif
                     </div>
                 </div>
             </div>
@@ -195,9 +193,9 @@
 
                                         // Periksa kondisi terlambat
                                         if (
-                                            ($jamIn > '07:15' && $jamIn <= '15:30') ||
-                                            ($jamIn > '16:15' && $jamIn <= '23:30') ||
-                                            ($jamIn > '00:30' && $jamIn < '06:30')
+                                            ($jamIn >= '00:00:00' && $jamIn <= '04:00:00') ||  // Shift 1
+                                            ($jamIn >= '07:05:00' && $jamIn <= '13:00:00') ||  // Shift 2
+                                            ($jamIn >= '16:05:00' && $jamIn <= '21:00:00')     // Shift 3
                                         ) {
                                             $status = 'bg-danger';
                                         }

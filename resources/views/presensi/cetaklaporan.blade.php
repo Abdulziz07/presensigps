@@ -70,6 +70,7 @@
     </table>
     <span style="display:block; text-align:center; transform: translateY(-5px);"><i>_________________________________________________________________________________________</i></span>
     <table class="tabeldatakaryawan" style="margin-top: 10px">
+        @foreach($presensi as $d)
         <tr>
             <td rowspan="6">
                 @php
@@ -81,7 +82,7 @@
         <tr>
             <td>NRP</td>
             <td>:</td>
-            <td>{{$karyawan->nik}}</td>
+            <td>{{$karyawan->nik}} </td>
         </tr>
         <tr>
             <td>Nama Karyawan</td>
@@ -125,19 +126,19 @@
 
             $jamMasukString = $jamIn->format('H:i');
 
-            // Tentukan shift dan batas waktu masuk
-            if ($jamMasukString >= '07:15' && $jamMasukString <= '15:30') {
-            // Shift 1
-            $batasMasuk = \Carbon\Carbon::parse($jamIn->format('Y-m-d').' 07:15:00');
-            } elseif ($jamMasukString >= '16:15' && $jamMasukString <= '23:30') {
-            // Shift 2
-            $batasMasuk = \Carbon\Carbon::parse($jamIn->format('Y-m-d').' 16:15:00');
-            } elseif ($jamMasukString >= '00:30' && $jamMasukString <= '06:30') {
-            // Shift 3 (tanpa subDay)
-            $batasMasuk = \Carbon\Carbon::parse($jamIn->format('Y-m-d').' 00:30:00');
+                        // Tentukan shift dan batas waktu masuk (sesuai jam keterlambatan yang baru)
+            if ($jamMasukString >= '07:05' && $jamMasukString <= '13:00') {
+                // Shift 2 (telat masuk antara 07:05 - 13:00)
+                $batasMasuk = \Carbon\Carbon::parse($jamIn->format('Y-m-d') . ' 07:05:00');
+            } elseif ($jamMasukString >= '16:05' && $jamMasukString <= '21:00') {
+                // Shift 3 (telat masuk antara 16:05 - 21:00)
+                $batasMasuk = \Carbon\Carbon::parse($jamIn->format('Y-m-d') . ' 16:05:00');
+            } elseif ($jamMasukString >= '00:00' && $jamMasukString <= '04:00') {
+                // Shift 1 (telat masuk antara 00:00 - 04:00)
+                $batasMasuk = \Carbon\Carbon::parse($jamIn->format('Y-m-d') . ' 00:00:00');
             } else {
-            // Fallback jika tidak sesuai shift
-            $batasMasuk = $jamIn;
+                // Fallback jika tidak sesuai rentang shift
+                $batasMasuk = $jamIn;
             }
 
             // Hitung keterlambatan
@@ -153,7 +154,11 @@
         <tr>
             <td>{{ $loop->iteration}}</td>
             <td>{{ date("d-m-Y",strtotime($d->tgl_presensi))}}</td>
-            <td>{{ $d->jam_in }}</td>
+            <td>
+                <span style="color: {{ $terlambat > 0 ? 'red' : 'black' }}">
+                    {{ $d->jam_in }}
+                </span>
+            </td>
             <td><img src="{{url($path_in)}}" alt="" width="60px" height="60px"></td>
             <td>{{ $d->jam_out != null ? $d->jam_out : 'Belum Absen'}}</td>
             <td>
@@ -169,8 +174,18 @@
                 @else
                 {{ $status }}
                 @endif
+                @php
+                    $status1 = match($d->status) {
+                        'p' => '(Shift 1)',
+                        's' => '(Shift 2)',
+                        'm' => '(Shift 3)',
+                        default => '(Dinas Luar)',
+                    };
+                @endphp
+                <br> {{$status1}}
             </td>
-            <td>{{ $jamKerjaFormatted }}</td>
+            <td>{{ $jamKerjaFormatted }}<br>
+                OT {{ $d->ot != null ? $d->ot : 0 }} Jam</td>
         </tr>
         @endforeach
     </table>
@@ -180,11 +195,11 @@
         </tr>
         <tr>
             <td style="text-align: center; vertical-align:bottom; height: 100px;">
-                <u>nama hrd</u><br>
+                <u></u><br>
                 <i><b>HRD Manager</b></i>
             </td>
             <td style="text-align: center; vertical-align:bottom;">
-                <u>nama direktur</u><br>
+                <u></u><br>
                 <i><b>Direktur</b></i>
             </td>
         </tr>
@@ -192,6 +207,7 @@
 
   </section>
 
+  @endforeach
 </body>
 
 </html>

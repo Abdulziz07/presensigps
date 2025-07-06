@@ -24,9 +24,9 @@
 
     // Periksa kondisi terlambat
     if (
-        ($jamIn > '07:00' && $jamIn <= '15:30') ||
-        ($jamIn >= '16:00' && $jamIn <= '23:30') ||
-        ($jamIn >= '00:30' && $jamIn < '06:31')
+        ($jamIn >= '00:00:00' && $jamIn <= '04:00:00') || // Telat Shift 1
+        ($jamIn >= '07:05:00' && $jamIn <= '13:00:00') || // Telat Shift 2
+        ($jamIn >= '16:05:00' && $jamIn <= '21:00:00')
     ) {
         $status = 'bg-danger';
     }

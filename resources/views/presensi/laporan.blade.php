@@ -17,7 +17,7 @@
             <div class="col-6">
                 <div class="card">
                 <div class="card-body">
-                    <form action="/presensi/cetaklaporan" target= "_blank" method="POST">
+                    <form action="/presensi/cetaklaporan" target= "_blank" method="POST" id="formCetakLaporan">
                         @csrf
                         <div class="row">
                             <div class="col-12">
@@ -79,3 +79,22 @@
 </div>
 </div>
 @endsection
+@push('myscript')
+<script>
+    $(function () {
+        $("#formCetakLaporan").submit(function (e) {
+            let nik = $("#nik").val();
+            if (nik === "") {
+                e.preventDefault(); // Hentikan submit form
+                Swal.fire({
+                    title: 'Peringatan',
+                    text: 'Silakan pilih karyawan terlebih dahulu!',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
+                return false;
+            }
+        });
+    });
+</script>
+@endpush

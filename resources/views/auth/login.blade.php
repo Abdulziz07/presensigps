@@ -18,7 +18,7 @@
 </head>
 
 <body style="background-color: #00004a;">
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- loader -->
     <div id="loader">
         <div class="spinner-border text-primary" role="status"></div>
@@ -41,10 +41,16 @@
                 @php
                     $messagewarning = Session::get('warning');
                     @endphp
+                    
                     @if (Session::get('warning'))
-                    <div class="alert alert-outline-warning">
-                        {{$messagewarning}}
-                    </div>
+                    <script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Login Gagal',
+                            text: '{{ session("warning") }}',
+                            confirmButtonColor: '#d33',
+                        });
+                    </script>
                     @endif
                 <form action="/proseslogin" method="POST">
                     @csrf
@@ -100,6 +106,7 @@
     <script src="{{ asset ('assets/js/plugins/jquery-circle-progress/circle-progress.min.js')}} "></script>
     <!-- Base Js File -->
     <script src="{{ asset ('assets/js/base.js')}} "></script>
+    
 
 
 </body>

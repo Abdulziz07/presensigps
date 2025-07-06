@@ -157,8 +157,19 @@
                 @else
                 {{ $status }}
                 @endif
+                @php
+                    $status1 = match($d->status) {
+                        'p' => '(Shift 1)',
+                        's' => '(Shift 2)',
+                        'm' => '(Shift 3)',
+                        default => '(Dinas Luar)',
+                    };
+                @endphp
+                <br> {{$status1}}
+
             </td>
-            <td>{{ $jamKerjaFormatted }}</td>
+            <td>{{ $jamKerjaFormatted }} <br>
+            OT {{ $d->ot != null ? $d->ot : 0 }} Jam</td>
         </tr>
         @endforeach
     </table>
@@ -168,11 +179,11 @@
         </tr>
         <tr>
             <td style="text-align: center; vertical-align:bottom; height: 100px;">
-                <u>nama hrd</u><br>
+                <u></u><br>
                 <i><b>HRD Manager</b></i>
             </td>
             <td style="text-align: center; vertical-align:bottom;">
-                <u>nama direktur</u><br>
+                <u></u><br>
                 <i><b>Direktur</b></i>
             </td>
         </tr>

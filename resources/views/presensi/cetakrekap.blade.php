@@ -69,7 +69,7 @@
             </td>
         </tr>
     </table>
-    <span style="display:block; text-align:center; transform: translateY(-5px);"><i>___________________________________________________________________________________________________________________________________</i></span>
+    <span style="display:block; text-align:center; transform: translateY(-5px);"><i>_________________________________________________________________________________________________________________________________</i></span>
     
     <table class="tabelpresensi">
         <tr>
@@ -77,6 +77,7 @@
             <th rowspan="2">Nama Karyawan</th>
             <th colspan="31">Tanggal</th>
             <th rowspan="2">TH</th>
+            <th rowspan="2">OT</th>
         </tr>
         <tr>
             <?php for($i = 1; $i <= 31; $i++) { ?>
@@ -101,29 +102,27 @@
                         $totalhadir++;
                     }
                 }
-            ?>
+
+                ?>
+            
             <td>
                 <span style="color:{{
                     (
-                        ($hadir[0] >= '06:30:00' && $hadir[0] <= '07:15:00') || 
-                        ($hadir[0] >= '15:30:00' && $hadir[0] <= '16:15:00') || 
-                        ($hadir[0] >= '00:00:00' && $hadir[0] <= '00:30:00')
+                        ($hadir[0] >= '00:00:00' && $hadir[0] <= '04:00:00') || 
+                        ($hadir[0] >= '07:05:00' && $hadir[0] <= '13:00:00') || 
+                        ($hadir[0] >= '16:05:00' && $hadir[0] <= '21:00:00')
                     ) ? '' : 'red'
                 }}">
                     {{ $hadir[0] }}
                 </span>
-                <span style="color:{{
-                    (
-                        ($hadir[1] >= '06:00:00' && $hadir[1] <= '07:30:00') || 
-                        ($hadir[1] >= '15:45:00' && $hadir[1] <= '16:15:00') || 
-                        ($hadir[1] >= '23:30:00' && $hadir[1] <= '23:59:59')
-                    ) ? '' : 'red'
-                }}">
+                <span>
                     {{ $hadir[1] }}
                 </span>
             </td>
             <?php } ?>
             <td>{{ $totalhadir }}</td>
+            
+            <td>{{ $d->total_ot ?? 0 }} Jam</td>
         </tr>
         @endforeach
     </table>
@@ -134,11 +133,11 @@
         </tr>
         <tr>
             <td style="text-align: center; vertical-align:bottom; height: 100px;">
-                <u>nama hrd</u><br>
+                <u></u><br>
                 <i><b>HRD Manager</b></i>
             </td>
             <td style="text-align: center; vertical-align:bottom;">
-                <u>nama direktur</u><br>
+                <u></u><br>
                 <i><b>Direktur</b></i>
             </td>
         </tr>

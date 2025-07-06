@@ -42,6 +42,7 @@
                                             <th>Foto</th>
                                             <th>Jam Pulang</th>
                                             <th>Foto</th>
+                                            <th>Over Time</th>
                                             <th>Keterangan</th>
                                             <th></th>
                                         </tr>

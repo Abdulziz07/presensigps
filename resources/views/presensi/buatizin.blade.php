@@ -61,17 +61,26 @@ $(document).ready(function() {
     });
 
     function toggleFields() {
-        var status = $('#status').val();
+    var status = $('#status').val();
 
-        if (status === 'c') {
-            $('#keterangan_group').addClass('d-none');
-            $('#foto_group').addClass('d-none');
-        } else {
-            $('#keterangan_group').removeClass('d-none');
-            $('#foto_group').removeClass('d-none');
-        }
+    if (status === 'c') {
+        // Jika Cuti: sembunyikan keterangan & foto
+        $('#keterangan_group').addClass('d-none');
+        $('#foto_group').addClass('d-none');
+    } else if (status === 'i') {
+        // Jika Izin: tampilkan keterangan, sembunyikan foto
+        $('#keterangan_group').removeClass('d-none');
+        $('#foto_group').addClass('d-none');
+    } else if (status === 's') {
+        // Jika Sakit: tampilkan semua
+        $('#keterangan_group').removeClass('d-none');
+        $('#foto_group').removeClass('d-none');
+    } else {
+        // Default: tampilkan semua
+        $('#keterangan_group').removeClass('d-none');
+        $('#foto_group').removeClass('d-none');
     }
-
+}
     $('#status').change(toggleFields);
     toggleFields(); // run once on page load
 
@@ -125,7 +134,7 @@ $(document).ready(function() {
                 icon: 'warning',
             });
             return false;
-        } else if(status != 'c' && foto == "") {
+        } else if(status != 'c' && status != 'i' && foto == "") {
             Swal.fire({
                 title: 'Oops !',
                 text: 'Foto harus diupload',

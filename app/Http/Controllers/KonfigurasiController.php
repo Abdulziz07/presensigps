@@ -27,4 +27,41 @@ class KonfigurasiController extends Controller
             return Redirect::back()->with(['warning' => 'Data Gagal Diupdate']);
         }
     }
+
+    public function lokasidinasluarkantor(){
+    
+        $lokasi = DB::table('konfigurasi_dinas')->orderBy('id', 'desc')->paginate(10);
+        return view('konfigurasi.lokasidinasluarkantor', compact('lokasi'));
+
+    }
+
+    public function datalokasiluardinas(Request $request){
+        $alamatdinas = $request -> alamatdinas;
+        $koordinatdinas = $request -> koordinatdinas;
+        $radiusdinas = $request -> radiusdinas;
+        
+        $data = [
+            'alamat' => $alamatdinas,
+            'koordinat_tujuan' => $koordinatdinas,
+            'radius_tujuan'=> $radiusdinas,
+        ];
+        $simpan = DB::table('konfigurasi_dinas')->insert($data);
+
+        if ($simpan) {
+            return redirect()->back()->with('success', 'Data lokasi dinas luar berhasil disimpan.');
+        } else {
+            return redirect()->back()->with('error', 'Gagal menyimpan data lokasi dinas luar.');
+        }
+
+    }
+
+    public function hapuslokasidinasluar($id)
+{
+    $hapus = DB::table('konfigurasi_dinas')->where('id', $id)->delete();
+
+    return response()->json([
+        'status' => $hapus ? 'success' : 'error',
+        'message' => $hapus ? 'Data berhasil dihapus' : 'Data gagal dihapus'
+    ]);
+}
 }

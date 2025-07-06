@@ -103,7 +103,7 @@ public function update($nik, Request $request){
                 'jabatan'=> $jabatan,
                 'no_hp' => $no_hp,
                 'kode_dept'=> $kode_dept,
-                'foto'=> $foto,
+                'foto1'=> $foto,
                 'password'=>$password
             ];
             $update = DB::table('karyawan')->where('nik',$nik)->update($data);
@@ -120,6 +120,7 @@ public function update($nik, Request $request){
             return Redirect::back()->with(['warning' => 'Data Gagal Di Update']);
         }
         }
+        
         public function delete($nik){
             $delete = DB::table('karyawan')->where('nik',$nik)->delete();
             if($delete){

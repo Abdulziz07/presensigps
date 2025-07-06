@@ -160,7 +160,7 @@
             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="/karyawan/store" method="POST" id="frmkaryawan">
+            <form action="/karyawan/store" method="POST" id="frmkaryawan" enctype="multipart/form-data" >
                 @csrf
                 <div class="row">
                     <div class="col-12">
@@ -303,7 +303,8 @@
             var alamat = $("#alamat").val();
             var jabatan = $("#jabatan").val();
             var no_hp = $("#no_hp").val();
-            var kode_dept = $("frmkaryawan").find("#kode_dept").val();
+            var foto = $("input[name='foto']").val();
+            var kode_dept = $("#frmkaryawan").find("#kode_dept").val();
             if(nik == ""){
                 Swal.fire({
                     title: 'Warning',
@@ -362,6 +363,14 @@
                     confirmButtonText: 'OK'
                     }).then( ()=> {
                         $("#no_hp").focus();
+                    });
+                return false;
+            } else if(foto == ""){
+                Swal.fire({
+                    title: 'Warning',
+                    text: 'Foto Harus Diunggah',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
                     });
                 return false;
             } else if(kode_dept == ""){

@@ -56,6 +56,7 @@ Route::middleware(['auth:karyawan'])->group(function(){
     //presensi
     Route::get('/presensi/create',[PresensiController::class, 'create']);
     Route::post('/presensi/store',[PresensiController::class, 'store']);
+    Route::post('/presensi/pulang', [PresensiController::class, 'absenPulang']); 
 
     //editprofile
     Route::get('/editprofile',[PresensiController::class,'editprofile']);
@@ -70,13 +71,12 @@ Route::middleware(['auth:karyawan'])->group(function(){
     Route::get('/presensi/buatizin',[PresensiController::class,'buatizin']);
     Route::post('/presensi/storeizin',[PresensiController::class, 'storeizin']);
     Route::post('/presensi/cekpengajuanizin',[PresensiController::class, 'cekpengajuanizin']);
+    
+    Route::get('/presensi/dinasluar', [PresensiController::class,'dinasluar']);
+    Route::get('/presensi/dinasluar/absen/{id}', [PresensiController::class, 'absenDinasLuar']);
+    Route::post('/presensi/masukdinas',[PresensiController::class, 'masukdinas']);
+    Route::post('/presensi/pulangdinas',[PresensiController::class, 'pulangdinas']);
 
-    //barang
-    Route::get('/presensi/barang',[PresensiController::class,'barang']);
-    // Saat tombol diklik, update lalu redirect ke detail
-    Route::get('/presensi/terima/{id}', [PresensiController::class, 'terimaKiriman'])->name('presensi.terima');
-    Route::get('/presensi/lihatbarang/{id}', [PresensiController::class, 'lihatbarang'])->name('presensi.lihatbarang');
-    Route::post('/presensi/selesaikanpengiriman/{id}',[PresensiController::class, 'selesaikanpengiriman']);
     
 });
 
@@ -111,13 +111,14 @@ Route::middleware(['auth:user'])->group(function(){
     Route::get('/presensi/izinsakit',[PresensiController::class,'izinsakit']);
     Route::post('/presensi/approveizinsakit',[PresensiController::class,'approveizinsakit']);
     Route::get('/presensi/{id}/batalkanizinsakit',[PresensiController::class,'batalkanizinsakit']);
-    
+    Route::post('/presensi/{id}/hapus',[PresensiController::class,'hapus']);
 
     Route::get('/konfigurasi/lokasikantor', [KonfigurasiController::class,'lokasikantor']);
+    Route::get('/konfigurasi/lokasidinasluarkantor',[KonfigurasiController::class,'lokasidinasluarkantor']);
     Route::post('/konfigurasi/updatelokasikantor', [KonfigurasiController::class,'updatelokasikantor']);
+    Route::post('/konfigurasi/datalokasidinasluar', [KonfigurasiController::class,'datalokasiluardinas']);
+    Route::delete('/konfigurasi/lokasidinasluarkantor/{id}', [KonfigurasiController::class, 'hapuslokasidinasluar']);
 
-    Route::get('/presensi/kirimbarang',[PresensiController::class,'kirimbarang']);
-    Route::post('/presensi/{nik}/delete', [PresensiController::class, "delete"]);
-    Route::post('/presensi/storeBarang', [PresensiController::class,'storeBarang']);
+
 });
 

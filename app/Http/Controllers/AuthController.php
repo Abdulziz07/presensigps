@@ -10,16 +10,28 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function proseslogin(Request $request){
-    
-        if(Auth::guard('karyawan')->attempt(['nik'=>$request->nik,'password'=> $request->password])){
-            return redirect('/dashboard');
-        }else{
-            return redirect('/')->with(['warning'=> 'Nik / Password Salah']);
+    public function proseslogin(Request $request)
+    {
+        if (empty($request->nik) && empty($request->password)) {
+            return redirect('/')->with('warning', 'NRP dan Password tidak boleh kosong');
         }
 
-    
+        if (empty($request->nik)) {
+            return redirect('/')->with('warning', 'NRP tidak boleh kosong');
+        }
 
+        if (empty($request->password)) {
+            return redirect('/')->with('warning', 'Password tidak boleh kosong');
+        }
+
+        if (Auth::guard('karyawan')->attempt([
+            'nik' => $request->nik,
+            'password' => $request->password
+        ])) {
+            return redirect('/dashboard');
+        } else {
+            return redirect('/')->with('warning', 'NRP atau Password salah');
+        }
     }
 
     public function proseslogout()
@@ -37,15 +49,26 @@ class AuthController extends Controller
         }
     }
 
-    public function prosesloginadmin(Request $request){
-    
+    public function prosesloginadmin(Request $request)
+{
+    // Validasi input
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required'
+    ], [
+        'email.required' => 'Email tidak boleh kosong',
+        'email.email' => 'Format email tidak valid',
+        'password.required' => 'Password tidak boleh kosong'
+    ]);
 
-        if(Auth::guard('user')->attempt(['email'=> $request->email,'password'=> $request->password])){
-            return redirect('/panel/dashboardadmin');
-        }else{
-            return redirect('/panel')->with(['warning'=> 'Email atau Password Salah']);
-        }
-    }  
+    // Proses login jika validasi berhasil
+    if (Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password])) {
+        return redirect('/panel/dashboardadmin');
+    } else {
+        return redirect('/panel')->with(['warning' => 'Email atau Password Salah']);
+    }
+}
+
 
     public function showForm()
     {

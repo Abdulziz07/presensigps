@@ -28,9 +28,9 @@ class DashboardController extends Controller
         COUNT(nik) as jmlhadir,
         SUM(
             CASE 
-                WHEN TIME(jam_in) BETWEEN "07:15:00" AND "15:30:00" THEN 1  -- Telat Shift 1
-                WHEN TIME(jam_in) BETWEEN "16:15:00" AND "23:30:00" THEN 1  -- Telat Shift 2
-                WHEN TIME(jam_in) BETWEEN "00:30:00" AND "06:30:00" THEN 1  -- Telat Shift 3
+                WHEN TIME(jam_in) BETWEEN "00:00:00" AND "04:00:00" THEN 1  -- Terlambat Shift 1
+                WHEN TIME(jam_in) BETWEEN "07:05:00" AND "13:00:00" THEN 1  -- Terlambat Shift 2
+                WHEN TIME(jam_in) BETWEEN "16:05:00" AND "21:00:00" THEN 1  -- Terlambat Shift 3
                 ELSE 0
             END
         ) as jmlterlambat
@@ -66,9 +66,9 @@ class DashboardController extends Controller
         COUNT(nik) as jmlhadir,
         SUM(
             CASE 
-                WHEN TIME(jam_in) BETWEEN "07:15:00" AND "15:30:00" THEN 1  -- Telat Shift 1
-                WHEN TIME(jam_in) BETWEEN "16:15:00" AND "23:30:00" THEN 1  -- Telat Shift 2
-                WHEN TIME(jam_in) BETWEEN "00:30:00" AND "06:30:00" THEN 1  -- Telat Shift 3
+                WHEN TIME(jam_in) BETWEEN "00:00:00" AND "04:00:00" THEN 1  -- Terlambat Shift 1
+                WHEN TIME(jam_in) BETWEEN "07:05:00" AND "13:00:00" THEN 1  -- Terlambat Shift 2
+                WHEN TIME(jam_in) BETWEEN "16:05:00" AND "21:00:00" THEN 1  -- Terlambat Shift 3
                 ELSE 0
             END
         ) as jmlterlambat
