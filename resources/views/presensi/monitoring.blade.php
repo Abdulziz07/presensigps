@@ -42,8 +42,9 @@
                                             <th>Foto</th>
                                             <th>Jam Pulang</th>
                                             <th>Foto</th>
-                                            <th>Over Time</th>
                                             <th>Keterangan</th>
+                                            <th>Over Time</th>
+                                            <th>Alasan</th>
                                             <th></th>
                                         </tr>
                                     </thead>

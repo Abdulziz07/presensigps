@@ -57,9 +57,23 @@
             <input type="text" class="form-control" id="ot" name="ot" placeholder="Jam OT hanya masuk saat Absen pulang">
         </div>
     </div>
+    <div class="form-group boxed">
+        <div class="input-wrapper">
+            <input type="text" class="form-control" id="alasan" name="alasan" placeholder="Masukan Alasan Dinas">
+        </div>
+    </div>
 <div class="row mt-2">
     <div class="col">
         <div id="map"></div>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col">
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col">
     </div>
 </div>
 
@@ -134,6 +148,16 @@
     var statusshift = $("#statusshift").val();
     var koordinat =$("#koordinat").val();
     var radius = $("#radius").val();
+    var alasan = $("#alasan").val();
+
+    if (alasan == "") {
+        Swal.fire({
+            title: 'Oops!',
+            text: 'Alasan harus diisi terlebih dahulu.',
+            icon: 'warning',
+        });
+        return false;
+    }
 
     $.ajax({
         type: 'POST',
@@ -144,7 +168,8 @@
             lokasi: lokasi,
             statusshift: statusshift,
             koordinat: koordinat,
-            radius:radius
+            radius:radius,
+            alasan:alasan
         },
         cache: false,
         success: function (respond) {

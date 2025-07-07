@@ -523,6 +523,7 @@ class PresensiController extends Controller
         $image          = $request->input('image');
         $koordinatKantor = $request->input('koordinat'); // "latitude,longitude"
         $radiusTarget = $request->input('radius'); // contoh: 100
+        $alasan         = $request->input('alasan');
 
         // Pecah koordinat kantor
         $lok = explode(",", $koordinatKantor);
@@ -566,7 +567,8 @@ class PresensiController extends Controller
             'jam_in'        => $jam,
             'foto_in'       => $fileName,
             'lokasi_in'     => $lokasi,
-            'status'        => $statusshift
+            'status'        => $statusshift,
+            'alasan'        => $alasan
         ];
 
         $simpan = DB::table('presensi')->insert($data_masuk);
