@@ -59,7 +59,7 @@ class PresensiController extends Controller
         }
 
         // Simpan gambar
-        $folderPath     = "public/upload/absensi/";
+        $folderPath     = "public/upload/absensi";
         $formatName     = $nik . "-" . $tgl_presensi . "-in";
         $image_parts    = explode(";base64,", $image);
         $image_base64   = base64_decode($image_parts[1]);
@@ -129,7 +129,7 @@ class PresensiController extends Controller
         }
     
         // Simpan foto pulang
-        $folderPath     = "public/upload/absensi/";
+        $folderPath     = "public/upload/absensi";
         $formatName     = $nik . "-" . $tgl_presensi . "-out";
         $image_parts    = explode(";base64,", $image);
         $image_base64   = base64_decode($image_parts[1]);
@@ -396,37 +396,37 @@ class PresensiController extends Controller
         $namabulan = ["","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
         $rekap = DB::table('presensi')
         ->selectRaw('presensi.nik,nama_lengkap,
-            MAX(IF(DAY(tgl_presensi) = 1,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_1,
-            MAX(IF(DAY(tgl_presensi) = 2,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_2,
-            MAX(IF(DAY(tgl_presensi) = 3,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_3,
-            MAX(IF(DAY(tgl_presensi) = 4,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_4,
-            MAX(IF(DAY(tgl_presensi) = 5,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_5,
-            MAX(IF(DAY(tgl_presensi) = 6,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_6,
-            MAX(IF(DAY(tgl_presensi) = 7,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_7,
-            MAX(IF(DAY(tgl_presensi) = 8,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_8,
-            MAX(IF(DAY(tgl_presensi) = 9,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_9,
-            MAX(IF(DAY(tgl_presensi) = 10,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_10,
-            MAX(IF(DAY(tgl_presensi) = 11,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_11,
-            MAX(IF(DAY(tgl_presensi) = 12,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_12,
-            MAX(IF(DAY(tgl_presensi) = 13,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_13,
-            MAX(IF(DAY(tgl_presensi) = 14,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_14,
-            MAX(IF(DAY(tgl_presensi) = 15,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_15,
-            MAX(IF(DAY(tgl_presensi) = 16,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_16,
-            MAX(IF(DAY(tgl_presensi) = 17,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_17,
-            MAX(IF(DAY(tgl_presensi) = 18,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_18,
-            MAX(IF(DAY(tgl_presensi) = 19,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_19,
-            MAX(IF(DAY(tgl_presensi) = 20,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_20,
-            MAX(IF(DAY(tgl_presensi) = 21,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_21,
-            MAX(IF(DAY(tgl_presensi) = 22,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_22,
-            MAX(IF(DAY(tgl_presensi) = 23,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_23,
-            MAX(IF(DAY(tgl_presensi) = 24,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_24,
-            MAX(IF(DAY(tgl_presensi) = 25,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_25,
-            MAX(IF(DAY(tgl_presensi) = 26,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_26,
-            MAX(IF(DAY(tgl_presensi) = 27,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_27,
-            MAX(IF(DAY(tgl_presensi) = 28,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_28,
-            MAX(IF(DAY(tgl_presensi) = 29,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_29,
-            MAX(IF(DAY(tgl_presensi) = 30,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_30,
-            MAX(IF(DAY(tgl_presensi) = 31,CONCAT(jam_in,"-",IFNULL(jam_out,"00:00:00")),"")) as tgl_31,
+            MAX(IF(DAY(tgl_presensi) = 1, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_1,
+            MAX(IF(DAY(tgl_presensi) = 2, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_2,
+            MAX(IF(DAY(tgl_presensi) = 3, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_3,
+            MAX(IF(DAY(tgl_presensi) = 4, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_4,
+            MAX(IF(DAY(tgl_presensi) = 5, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_5,
+            MAX(IF(DAY(tgl_presensi) = 6, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_6,
+            MAX(IF(DAY(tgl_presensi) = 7, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_7,
+            MAX(IF(DAY(tgl_presensi) = 8, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_8,
+            MAX(IF(DAY(tgl_presensi) = 9, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_9,
+            MAX(IF(DAY(tgl_presensi) = 10, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_10,
+            MAX(IF(DAY(tgl_presensi) = 11, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_11,
+            MAX(IF(DAY(tgl_presensi) = 12, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_12,
+            MAX(IF(DAY(tgl_presensi) = 13, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_13,
+            MAX(IF(DAY(tgl_presensi) = 14, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_14,
+            MAX(IF(DAY(tgl_presensi) = 15, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_15,
+            MAX(IF(DAY(tgl_presensi) = 16, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_16,
+            MAX(IF(DAY(tgl_presensi) = 17, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_17,
+            MAX(IF(DAY(tgl_presensi) = 18, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_18,
+            MAX(IF(DAY(tgl_presensi) = 19, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_19,
+            MAX(IF(DAY(tgl_presensi) = 20, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_20,
+            MAX(IF(DAY(tgl_presensi) = 21, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_21,
+            MAX(IF(DAY(tgl_presensi) = 22, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_22,
+            MAX(IF(DAY(tgl_presensi) = 23, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_23,
+            MAX(IF(DAY(tgl_presensi) = 24, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_24,
+            MAX(IF(DAY(tgl_presensi) = 25, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_25,
+            MAX(IF(DAY(tgl_presensi) = 26, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_26,
+            MAX(IF(DAY(tgl_presensi) = 27, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_27,
+            MAX(IF(DAY(tgl_presensi) = 28, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_28,
+            MAX(IF(DAY(tgl_presensi) = 29, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_29,
+            MAX(IF(DAY(tgl_presensi) = 30, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_30,
+            MAX(IF(DAY(tgl_presensi) = 31, CONCAT(jam_in, "-", IFNULL(jam_out, "00:00:00"), IF(ot >= 1, "<br>OT", "")), "")) as tgl_31,
             SUM(IFNULL(ot, 0)) as total_ot')
         ->join('karyawan','presensi.nik','=','karyawan.nik')
         ->whereRaw('MONTH(tgl_presensi)="'.$bulan.'"')
@@ -514,72 +514,95 @@ class PresensiController extends Controller
         }
 
         public function masukdinas(Request $request)
-    {
-        $nik            = Auth::guard('karyawan')->user()->nik;
-        $tgl_presensi   = date("Y-m-d");
-        $jam            = date("H:i:s");
-        $statusshift    = $request->input('statusshift');
-        $lokasi         = $request->input('lokasi');
-        $image          = $request->input('image');
-        $koordinatKantor = $request->input('koordinat'); // "latitude,longitude"
-        $radiusTarget = $request->input('radius'); // contoh: 100
-        $alasan         = $request->input('alasan');
+        {
+            $nik            = Auth::guard('karyawan')->user()->nik;
+            $tgl_presensi   = date("Y-m-d");
+            $jam            = date("H:i:s");
+            $statusshift    = $request->input('statusshift');
+            $lokasi         = $request->input('lokasi');
+            $image          = $request->input('image');
+            $koordinatKantor = $request->input('koordinat'); // "latitude,longitude"
+            $radiusTarget   = $request->input('radius');     // contoh: 100
+            $alasan         = $request->input('alasan');
 
-        // Pecah koordinat kantor
-        $lok = explode(",", $koordinatKantor);
-        $latitudekantor = $lok[0];
-        $longitudekantor = $lok[1];
+            // Pecah koordinat kantor
+            $lok = explode(",", $koordinatKantor);
+            $latitudekantor = $lok[0];
+            $longitudekantor = $lok[1];
 
-        // Pecah lokasi user
-        $lokasiuser = explode(",", $lokasi);
-        $latitudeuser = $lokasiuser[0];
-        $longitudeuser = $lokasiuser[1];
+            // Pecah lokasi user
+            $lokasiuser = explode(",", $lokasi);
+            $latitudeuser = $lokasiuser[0];
+            $longitudeuser = $lokasiuser[1];
 
-        // Hitung jarak ke kantor
-        $jarak = $this->distance($latitudekantor, $longitudekantor, $latitudeuser, $longitudeuser);
-        $radius = round($jarak["meters"]);
+            // Hitung jarak ke kantor
+            $jarak = $this->distance($latitudekantor, $longitudekantor, $latitudeuser, $longitudeuser);
+            $radius = round($jarak["meters"]);
 
-        // Cek apakah sudah absen
-        $cek = DB::table('presensi')->where('tgl_presensi', $tgl_presensi)->where('nik', $nik)->count();
-        if ($cek > 0) {
-            echo "error|Anda sudah melakukan absen hari ini|in";
-            return;
+            // Cek radius
+            if ($radius > $radiusTarget) {
+                echo "error|Maaf, Anda di luar radius lokasi kantor sejauh $radius meter|radius";
+                return;
+            }
+
+            // Ambil data presensi jika sudah ada
+            $presensi = DB::table('presensi')
+                ->where('tgl_presensi', $tgl_presensi)
+                ->where('nik', $nik)
+                ->first();
+
+            // Simpan gambar
+            $folderPath     = "public/upload/absensi";
+            $formatName     = $nik . "-" . $tgl_presensi . "-in";
+            $image_parts    = explode(";base64,", $image);
+            $image_base64   = base64_decode($image_parts[1]);
+            $fileName       = $formatName . ".png";
+            $file           = $folderPath . $fileName;
+
+            // Data yang akan disimpan
+            $data_masuk = [
+                'jam_in'    => $jam,
+                'foto_in'   => $fileName,
+                'lokasi_in' => $lokasi,
+                'status'    => $statusshift,
+                'alasan'    => $alasan
+            ];
+
+            if ($presensi) {
+                // Jika status sudah 'd', tidak izinkan update
+                if ($presensi->status == 'd') {
+                    echo "error|Anda sudah melakukan absen dinas hari ini|in";
+                    return;
+                }
+            
+                // Cek apakah data yang sama
+                $sama = (
+                    trim($presensi->lokasi_in) == trim($lokasi) &&
+                    trim($presensi->status) == trim($statusshift) &&
+                    trim($presensi->alasan) == trim($alasan)
+                );
+            
+                if ($sama) {
+                    echo "error|Data presensi sudah sama, tidak perlu update ulang|in";
+                    return;
+                }
+            
+                // Jika belum status 'd' → lakukan update
+                $update = DB::table('presensi')
+                    ->where('tgl_presensi', $tgl_presensi)
+                    ->where('nik', $nik)
+                    ->update($data_masuk);
+            
+                if ($update) {
+                    Storage::put($file, $image_base64);
+                    echo "success|Data absen diperbarui, Terimakasih Selamat Bekerja|in";
+                } else {
+                    echo "error|Gagal memperbarui data presensi|in";
+                }
+            }
         }
+            
 
-        // Cek radius
-        if ($radius > $radiusTarget) {
-            echo "error|Maaf, Anda di luar radius lokasi kantor sejauh $radius meter|radius";
-            return;
-        }
-
-        // Simpan gambar
-        $folderPath     = "public/upload/absensi";
-        $formatName     = $nik . "-" . $tgl_presensi . "-in";
-        $image_parts    = explode(";base64,", $image);
-        $image_base64   = base64_decode($image_parts[1]);
-        $fileName       = $formatName . ".png";
-        $file           = $folderPath . $fileName;
-
-        // Simpan data ke database
-        $data_masuk = [
-            'nik'           => $nik,
-            'tgl_presensi'  => $tgl_presensi,
-            'jam_in'        => $jam,
-            'foto_in'       => $fileName,
-            'lokasi_in'     => $lokasi,
-            'status'        => $statusshift,
-            'alasan'        => $alasan
-        ];
-
-        $simpan = DB::table('presensi')->insert($data_masuk);
-
-        if ($simpan) {
-            echo "success|Terimakasih, Selamat bekerja|in";
-            Storage::put($file, $image_base64);
-        } else {
-            echo "error|Maaf, gagal melakukan absen. Hubungi IT Dept|in";
-        }
-    }
 
     public function pulangdinas(Request $request)
     {

@@ -126,7 +126,7 @@
 
             $jamMasukString = $jamIn->format('H:i');
 
-                        // Tentukan shift dan batas waktu masuk (sesuai jam keterlambatan yang baru)
+                // Tentukan shift dan batas waktu masuk (sesuai jam keterlambatan yang baru)
             if ($jamMasukString >= '07:05' && $jamMasukString <= '13:00') {
                 // Shift 2 (telat masuk antara 07:05 - 13:00)
                 $batasMasuk = \Carbon\Carbon::parse($jamIn->format('Y-m-d') . ' 07:05:00');

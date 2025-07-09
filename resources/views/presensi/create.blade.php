@@ -37,6 +37,16 @@
         <div class="webcam-capture"></div>
     </div>
 </div>
+</div>
+        <div class="form-group boxed">
+            <select name="statusshift" id="statusshift" class="form-control">
+                <option value="">Pilih Shift</option>
+                <option value="p">Shift 1 (Jam 0)</option>
+                <option value="s">Shift 2 (Jam 7)</option>
+                <option value="m">Shift 3 (Jam 16)</option>
+            </select>
+        </div>
+    </div>
 <div class="row">
     <div class="col">
         <button id="takeabsen" class="btn btn-primary btn-block">
@@ -47,16 +57,6 @@
             <ion-icon name="camera-outline"></ion-icon>
             Absen Pulang
         </button>
-    </div>
-        <div class="form-group boxed">
-            <select name="statusshift" id="statusshift" class="form-control">
-                <option value="">Pilih Shift</option>
-                <option value="p">Shift 1 (Jam 0)</option>
-                <option value="s">Shift 2 (Jam 7)</option>
-                <option value="m">Shift 3 (Jam 16)</option>
-            </select>
-        </div>
-    </div>
     <div class="form-group boxed">
         <div class="input-wrapper">
             <input type="text" class="form-control" id="ot" name="ot" placeholder="Jam OT hanya masuk saat Absen pulang">
@@ -65,6 +65,18 @@
 <div class="row mt-2">
     <div class="col">
         <div id="map"></div>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col">
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col">
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col">
     </div>
 </div>
 

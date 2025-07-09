@@ -78,6 +78,7 @@
             <th colspan="31">Tanggal</th>
             <th rowspan="2">TH</th>
             <th rowspan="2">OT</th>
+            <th rowspan="2">Total Telat</th>
         </tr>
         <tr>
             <?php for($i = 1; $i <= 31; $i++) { ?>
@@ -91,6 +92,7 @@
             <td>{{ $d->nama_lengkap }}</td>
             <?php
             $totalhadir = 0;
+            $jumlahtelat = 0;
             for ($i = 1; $i <= 31; $i++) {
                 $tgl = "tgl_" . $i;
                 $hadir = ['',''];
@@ -100,10 +102,17 @@
                     // Jika jam masuk tidak kosong, anggap hadir
                     if (!empty($hadir[0])) {
                         $totalhadir++;
+
+                        if (
+                            ($hadir[0] >= '00:00:00' && $hadir[0] <= '04:00:00') ||
+                            ($hadir[0] >= '07:05:00' && $hadir[0] <= '13:00:00') ||
+                            ($hadir[0] >= '16:05:00' && $hadir[0] <= '21:00:00')
+                        ) {
+                            $jumlahtelat++;
+                        }
                     }
                 }
-
-                ?>
+            ?>
             
             <td>
                 <span style="color:{{
@@ -111,18 +120,19 @@
                         ($hadir[0] >= '00:00:00' && $hadir[0] <= '04:00:00') || 
                         ($hadir[0] >= '07:05:00' && $hadir[0] <= '13:00:00') || 
                         ($hadir[0] >= '16:05:00' && $hadir[0] <= '21:00:00')
-                    ) ? '' : 'red'
+                    ) ? 'red' : ''
                 }}">
-                    {{ $hadir[0] }}
+                    {!! $hadir[0] !!}
                 </span>
                 <span>
-                    {{ $hadir[1] }}
+                    {!! $hadir[1] !!}
                 </span>
             </td>
             <?php } ?>
             <td>{{ $totalhadir }}</td>
             
             <td>{{ $d->total_ot ?? 0 }} Jam</td>
+            <td>{{ $jumlahtelat }}</td>
         </tr>
         @endforeach
     </table>

@@ -122,15 +122,15 @@
             $jamMasukString = $jamIn->format('H:i');
 
             // Tentukan shift dan batas waktu masuk
-            if ($jamMasukString >= '07:15' && $jamMasukString <= '15:30') {
+            if ($jamMasukString >= '07:05' && $jamMasukString <= '13:00') {
             // Shift 1
-            $batasMasuk = \Carbon\Carbon::parse($jamIn->format('Y-m-d').' 07:15:00');
-            } elseif ($jamMasukString >= '16:15' && $jamMasukString <= '23:30') {
+            $batasMasuk = \Carbon\Carbon::parse($jamIn->format('Y-m-d').' 07:05:00');
+            } elseif ($jamMasukString >= '16:05' && $jamMasukString <= '21:00') {
             // Shift 2
-            $batasMasuk = \Carbon\Carbon::parse($jamIn->format('Y-m-d').' 16:15:00');
-            } elseif ($jamMasukString >= '00:30' && $jamMasukString <= '06:30') {
+            $batasMasuk = \Carbon\Carbon::parse($jamIn->format('Y-m-d').' 16:05:00');
+            } elseif ($jamMasukString >= '00:00' && $jamMasukString <= '04:00') {
             // Shift 3 (tanpa subDay)
-            $batasMasuk = \Carbon\Carbon::parse($jamIn->format('Y-m-d').' 00:30:00');
+            $batasMasuk = \Carbon\Carbon::parse($jamIn->format('Y-m-d').' 00:00:00');
             } else {
             // Fallback jika tidak sesuai shift
             $batasMasuk = $jamIn;

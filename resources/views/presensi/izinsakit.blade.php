@@ -105,7 +105,7 @@
                                 }}
                             </td>
                             <td>
-                                {{ $d->status == 'c' ? '-' : $d->keterangan }}
+                                {{$d->keterangan }}
                             </td>
                             <td>
                                 @if ($d->status != 'i' && $d->status != 'c')

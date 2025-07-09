@@ -40,6 +40,11 @@
         <div class="webcam-capture"></div>
     </div>
 </div>
+<div class="form-group boxed">
+        <div class="input-wrapper">
+            <input type="text" class="form-control" id="alasan" name="alasan" placeholder="Masukan Alasan Dinas">
+        </div>
+    </div>
 <div class="row">
     <div class="col">
         <button id="takeabsen" class="btn btn-primary btn-block">
@@ -57,16 +62,16 @@
             <input type="text" class="form-control" id="ot" name="ot" placeholder="Jam OT hanya masuk saat Absen pulang">
         </div>
     </div>
-    <div class="form-group boxed">
-        <div class="input-wrapper">
-            <input type="text" class="form-control" id="alasan" name="alasan" placeholder="Masukan Alasan Dinas">
-        </div>
-    </div>
 <div class="row mt-2">
     <div class="col">
         <div id="map"></div>
     </div>
 </div>
+<div class="row mt-4">
+    <div class="col">
+    </div>
+</div>
+
 <div class="row mt-4">
     <div class="col">
     </div>

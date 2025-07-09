@@ -64,8 +64,7 @@ $(document).ready(function() {
     var status = $('#status').val();
 
     if (status === 'c') {
-        // Jika Cuti: sembunyikan keterangan & foto
-        $('#keterangan_group').addClass('d-none');
+        // Jika Cuti: sembunyikan foto
         $('#foto_group').addClass('d-none');
     } else if (status === 'i') {
         // Jika Izin: tampilkan keterangan, sembunyikan foto
@@ -127,7 +126,7 @@ $(document).ready(function() {
                 icon: 'warning',
             });
             return false;
-        } else if(status != 'c' && keterangan == "") {
+        } else if( keterangan == "") {
             Swal.fire({
                 title: 'Oops !',
                 text: 'Keterangan harus Diisi',
